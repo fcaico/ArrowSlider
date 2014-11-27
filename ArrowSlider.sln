@@ -1,0 +1,96 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArrowSliderSample", "ArrowSliderSample\ArrowSliderSample.csproj", "{DBE9702D-3270-4337-8E0D-1E958C18944D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fcaico.Controls.ArrowSlider", "ArrowSlider\Fcaico.Controls.ArrowSlider.csproj", "{FC491686-DC25-4CFB-BCEE-0AB13C6FD8E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fcaico.iOS.TimePicker", "..\TimePicker\TimePicker\Fcaico.iOS.TimePicker.csproj", "{F3608B18-6A68-49E2-9731-515B87C7671A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|iPhoneSimulator = Debug|iPhoneSimulator
+		Release|iPhoneSimulator = Release|iPhoneSimulator
+		Debug|iPhone = Debug|iPhone
+		Release|iPhone = Release|iPhone
+		Ad-Hoc|iPhone = Ad-Hoc|iPhone
+		AppStore|iPhone = AppStore|iPhone
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DBE9702D-3270-4337-8E0D-1E958C18944D}.Ad-Hoc|iPhone.ActiveCfg = Ad-Hoc|iPhone
+		{DBE9702D-3270-4337-8E0D-1E958C18944D}.Ad-Hoc|iPhone.Build.0 = Ad-Hoc|iPhone
+		{DBE9702D-3270-4337-8E0D-1E958C18944D}.AppStore|iPhone.ActiveCfg = AppStore|iPhone
+		{DBE9702D-3270-4337-8E0D-1E958C18944D}.AppStore|iPhone.Build.0 = AppStore|iPhone
+		{DBE9702D-3270-4337-8E0D-1E958C18944D}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{DBE9702D-3270-4337-8E0D-1E958C18944D}.Debug|iPhone.Build.0 = Debug|iPhone
+		{DBE9702D-3270-4337-8E0D-1E958C18944D}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{DBE9702D-3270-4337-8E0D-1E958C18944D}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{DBE9702D-3270-4337-8E0D-1E958C18944D}.Release|iPhone.ActiveCfg = Release|iPhone
+		{DBE9702D-3270-4337-8E0D-1E958C18944D}.Release|iPhone.Build.0 = Release|iPhone
+		{DBE9702D-3270-4337-8E0D-1E958C18944D}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{DBE9702D-3270-4337-8E0D-1E958C18944D}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+		{F3608B18-6A68-49E2-9731-515B87C7671A}.Ad-Hoc|iPhone.ActiveCfg = Release|Any CPU
+		{F3608B18-6A68-49E2-9731-515B87C7671A}.Ad-Hoc|iPhone.Build.0 = Release|Any CPU
+		{F3608B18-6A68-49E2-9731-515B87C7671A}.AppStore|iPhone.ActiveCfg = Release|Any CPU
+		{F3608B18-6A68-49E2-9731-515B87C7671A}.AppStore|iPhone.Build.0 = Release|Any CPU
+		{F3608B18-6A68-49E2-9731-515B87C7671A}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{F3608B18-6A68-49E2-9731-515B87C7671A}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{F3608B18-6A68-49E2-9731-515B87C7671A}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{F3608B18-6A68-49E2-9731-515B87C7671A}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{F3608B18-6A68-49E2-9731-515B87C7671A}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{F3608B18-6A68-49E2-9731-515B87C7671A}.Release|iPhone.Build.0 = Release|Any CPU
+		{F3608B18-6A68-49E2-9731-515B87C7671A}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{F3608B18-6A68-49E2-9731-515B87C7671A}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{FC491686-DC25-4CFB-BCEE-0AB13C6FD8E0}.Ad-Hoc|iPhone.ActiveCfg = Release|Any CPU
+		{FC491686-DC25-4CFB-BCEE-0AB13C6FD8E0}.Ad-Hoc|iPhone.Build.0 = Release|Any CPU
+		{FC491686-DC25-4CFB-BCEE-0AB13C6FD8E0}.AppStore|iPhone.ActiveCfg = Release|Any CPU
+		{FC491686-DC25-4CFB-BCEE-0AB13C6FD8E0}.AppStore|iPhone.Build.0 = Release|Any CPU
+		{FC491686-DC25-4CFB-BCEE-0AB13C6FD8E0}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{FC491686-DC25-4CFB-BCEE-0AB13C6FD8E0}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{FC491686-DC25-4CFB-BCEE-0AB13C6FD8E0}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{FC491686-DC25-4CFB-BCEE-0AB13C6FD8E0}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{FC491686-DC25-4CFB-BCEE-0AB13C6FD8E0}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{FC491686-DC25-4CFB-BCEE-0AB13C6FD8E0}.Release|iPhone.Build.0 = Release|Any CPU
+		{FC491686-DC25-4CFB-BCEE-0AB13C6FD8E0}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{FC491686-DC25-4CFB-BCEE-0AB13C6FD8E0}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = ArrowSliderSample\ArrowSliderSample.csproj
+		Policies = $0
+		$0.DotNetNamingPolicy = $1
+		$1.DirectoryNamespaceAssociation = PrefixedHierarchical
+		$1.ResourceNamePolicy = FileName
+		$0.TextStylePolicy = $2
+		$2.EolMarker = Windows
+		$2.inheritsSet = VisualStudio
+		$2.inheritsScope = text/plain
+		$2.scope = text/x-csharp
+		$0.CSharpFormattingPolicy = $3
+		$3.IndentSwitchBody = True
+		$3.AnonymousMethodBraceStyle = NextLine
+		$3.PropertyBraceStyle = NextLine
+		$3.PropertyGetBraceStyle = NextLine
+		$3.PropertySetBraceStyle = NextLine
+		$3.EventBraceStyle = NextLine
+		$3.EventAddBraceStyle = NextLine
+		$3.EventRemoveBraceStyle = NextLine
+		$3.AllowEventAddBlockInline = False
+		$3.AllowEventRemoveBlockInline = False
+		$3.StatementBraceStyle = NextLine
+		$3.ElseNewLinePlacement = NewLine
+		$3.CatchNewLinePlacement = NewLine
+		$3.FinallyNewLinePlacement = NewLine
+		$3.WhileNewLinePlacement = NewLine
+		$3.ArrayInitializerWrapping = DoNotChange
+		$3.BeforeMethodCallParentheses = False
+		$3.BeforeIndexerDeclarationBracket = False
+		$3.AfterDelegateDeclarationParameterComma = True
+		$3.NewParentheses = False
+		$3.SpacesBeforeBrackets = False
+		$3.SpacesAfterTypecast = True
+		$3.BlankLinesBetweenTypes = 2
+		$3.inheritsSet = Mono
+		$3.inheritsScope = text/x-csharp
+		$3.scope = text/x-csharp
+	EndGlobalSection
+EndGlobal
