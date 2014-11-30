@@ -42,6 +42,7 @@
     <Compile Include="ArrowSliderStyleKit.cs" />
     <Compile Include="ArrowSliderView.cs" />
     <Compile Include="ArrowSlider.cs" />
+    <Compile Include="ArrowSliderDelegate.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
 </Project>

@@ -3,6 +3,7 @@ using System.Drawing;
 
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
+using System.Collections.Generic;
 
 namespace ArrowSliderSample
 {
@@ -27,6 +28,15 @@ namespace ArrowSliderSample
 			base.ViewDidLoad ();
 			
 			// Perform any additional setup after loading the view, typically from a nib.
+            MyArrowSlider.Values = new List<Tuple<string, object>>
+            {
+                new Tuple<string, object> ( "One", 1 ),
+                new Tuple<string, object> ( "Two", 2 ),
+                new Tuple<string, object> ( "Three", 3),
+                new Tuple<string, object> ( "Four", 4),
+                new Tuple<string, object> ( "Five", 5)
+            };
+
 		}
 
 		public override void ViewWillAppear (bool animated)

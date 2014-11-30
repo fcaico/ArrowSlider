@@ -19,7 +19,6 @@ namespace Fcaico.Controls.ArrowSlider
         }
 
 
-
         public event EventHandler PositionChanged;
 
 		public ArrowSlider () : base()
@@ -51,7 +50,11 @@ namespace Fcaico.Controls.ArrowSlider
 
             PointF location = touch.LocationInView(this);
 
-            if (location.X > Frame.Right)
+            if (location.X < Frame.Left)
+            {
+                PercentFilled = 0f;
+            }
+            else if (location.X > Frame.Right)
             {
                 PercentFilled = 1f;
             }
