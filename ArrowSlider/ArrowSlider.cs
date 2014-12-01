@@ -18,6 +18,11 @@ namespace Fcaico.Controls.ArrowSlider
             set;
         }
 
+        public int NumSteps
+        {
+            get;
+            set;
+        }
 
         public event EventHandler PositionChanged;
 
@@ -91,7 +96,19 @@ namespace Fcaico.Controls.ArrowSlider
 		public override void Draw (System.Drawing.RectangleF rect)
 		{
 			base.Draw (rect);
-            ArrowSliderStyleKit.DrawArrowSlider (Color, Color, PercentFilled, rect.Location, rect.Size);
+
+            float filled = PercentFilled;
+
+            if (NumSteps > 0)
+            {
+                float percentPerStep = 100f / ((float) (NumSteps -1));
+                float percent = (float) Math.Round(PercentFilled * 100f);
+                int curStep = (int) Math.Truncate(percent / percentPerStep);
+
+                filled = (((float) curStep) * percentPerStep) / 100f;
+            }
+
+            ArrowSliderStyleKit.DrawArrowSlider (Color, Color, filled, rect.Location, rect.Size);
 		}
 	}
 }

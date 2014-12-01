@@ -28,15 +28,21 @@ namespace ArrowSliderSample
 			base.ViewDidLoad ();
 			
 			// Perform any additional setup after loading the view, typically from a nib.
-            MyArrowSlider.Values = new List<Tuple<string, object>>
+            DiscreteArrowSlider.Values = new List<Tuple<string, object>>
             {
-                new Tuple<string, object> ( "One", 1 ),
-                new Tuple<string, object> ( "Two", 2 ),
-                new Tuple<string, object> ( "Three", 3),
-                new Tuple<string, object> ( "Four", 4),
-                new Tuple<string, object> ( "Five", 5)
+                new Tuple<string, object> ( "January", 1 ),
+                new Tuple<string, object> ( "February", 2 ),
+                new Tuple<string, object> ( "March", 3),
+                new Tuple<string, object> ( "April", 4),
+                new Tuple<string, object> ( "May", 5),
+                new Tuple<string, object> ( "June", 6 ),
+                new Tuple<string, object> ( "July", 7 ),
+                new Tuple<string, object> ( "August", 8 ),
+                new Tuple<string, object> ( "September", 9 ),
+                new Tuple<string, object> ( "October", 10 ),
+                new Tuple<string, object> ( "November", 11 ),
+                new Tuple<string, object> ( "December", 12 )
             };
-
 		}
 
 		public override void ViewWillAppear (bool animated)

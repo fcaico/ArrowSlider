@@ -16,6 +16,7 @@ namespace Fcaico.Controls.ArrowSlider
         private float _percentFilled = 0f;
         private UIFont _labelFont = UIFont.SystemFontOfSize(22);
         private List<Tuple<string, object>> _values;
+        private bool _isDiscrete;
         private int _numSteps = 100;
 
         [Export("ArrowColor"), Browsable(true)]
@@ -30,6 +31,24 @@ namespace Fcaico.Controls.ArrowSlider
                 if (_arrowColor != value)
                 {
                     _arrowColor = value;
+                    SetNeedsDisplay();
+                }
+            }
+        }
+
+        [Export("IsDiscrete"), Browsable(true)]
+        public bool IsDiscrete
+        {
+            get
+            {
+                return _isDiscrete;
+            }
+            set
+            {
+                if (_isDiscrete != value)
+                {
+                    _isDiscrete = value;
+                    _arrow.NumSteps = _numSteps;
                     SetNeedsDisplay();
                 }
             }
@@ -59,6 +78,10 @@ namespace Fcaico.Controls.ArrowSlider
             {
                 _values = value;
                 _numSteps = _values.Count;
+                if (IsDiscrete)
+                {
+                    _arrow.NumSteps = _numSteps;
+                }
 
                 SetNeedsDisplay();
             }
@@ -168,7 +191,7 @@ namespace Fcaico.Controls.ArrowSlider
                 float val = (i / 100f);
                 _values.Add(new Tuple<string,object>(val.ToString("P0"), i));
             }
-            _numSteps = 100;           
+            _numSteps = 101;           
         }
 
 		private void SetupConstraints()

@@ -16,13 +16,21 @@ namespace ArrowSliderSample
 	{
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		Fcaico.Controls.ArrowSlider.ArrowSliderView MyArrowSlider { get; set; }
+		Fcaico.Controls.ArrowSlider.ArrowSliderView ContinuousArrowSlider { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		Fcaico.Controls.ArrowSlider.ArrowSliderView DiscreteArrowSlider { get; set; }
 
 		void ReleaseDesignerOutlets ()
 		{
-			if (MyArrowSlider != null) {
-				MyArrowSlider.Dispose ();
-				MyArrowSlider = null;
+			if (ContinuousArrowSlider != null) {
+				ContinuousArrowSlider.Dispose ();
+				ContinuousArrowSlider = null;
+			}
+			if (DiscreteArrowSlider != null) {
+				DiscreteArrowSlider.Dispose ();
+				DiscreteArrowSlider = null;
 			}
 		}
 	}

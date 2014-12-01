@@ -13,7 +13,8 @@
                         <viewControllerLayoutGuide type="bottom" id="4"/>
                     </layoutGuides>
                     <connections>
-                        <outlet property="MyArrowSlider" destination="57" id="name-outlet-57"/>
+                        <outlet property="ContinuousArrowSlider" destination="57" id="name-outlet-57"/>
+                        <outlet property="DiscreteArrowSlider" destination="63" id="name-outlet-63"/>
                     </connections>
                     <view contentMode="scaleToFill" id="18" translatesAutoresizingMaskIntoConstraints="NO" key="view">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -36,8 +37,21 @@
                                         <real key="value" value="3"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="ArrowColor">
+                                        <color key="value" colorSpace="calibratedRGB" red="0" green="0" blue="1" alpha="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="IsDiscrete" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <view contentMode="scaleToFill" id="63" customClass="ArrowSliderView" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="20" y="136" width="280" height="45"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="PercentFilled">
+                                        <real key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="ArrowColor">
                                         <color key="value" colorSpace="calibratedRGB" red="1" green="0.49803921568627452" blue="0" alpha="1"/>
                                     </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="IsDiscrete" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
