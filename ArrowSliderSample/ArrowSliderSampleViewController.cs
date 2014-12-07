@@ -43,6 +43,13 @@ namespace ArrowSliderSample
                 new Tuple<string, object> ( "November", 11 ),
                 new Tuple<string, object> ( "December", 12 )
             };
+
+            List<Tuple<string, object>> durations = new List<Tuple<string, object>>();
+            for (int i = 1; i < 12; i++)
+            {
+                durations.Add(new Tuple<string, object>(string.Format("{0} Hours", i), i));
+            }
+            DurationSlider.Values = durations;
 		}
 
 		public override void ViewWillAppear (bool animated)

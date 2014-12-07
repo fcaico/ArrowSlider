@@ -6,13 +6,17 @@ namespace Fcaico.Controls.ArrowSlider
 {
 	internal class ArrowSlider : UIView
 	{
+        private float _percentFilled = 0f;
+        private float _discretePercentFilled = 0f;
+        private int _currentStep = 0;
+
 		public UIColor Color 
 		{
 			get;
 			set;
 		}
 
-        public float PercentFilled
+        public bool IsDiscrete
         {
             get;
             set;
@@ -24,12 +28,24 @@ namespace Fcaico.Controls.ArrowSlider
             set;
         }
 
+        public int CurrentStep
+        {
+            get
+            {
+                return _currentStep;
+            }
+            set
+            {
+                _currentStep = value;
+                SetNeedsDisplay();
+            }
+        }
+
         public event EventHandler PositionChanged;
 
 		public ArrowSlider () : base()
 		{
             BackgroundColor = UIColor.Clear;
-
 		}
 
         public override void TouchesBegan (MonoTouch.Foundation.NSSet touches, UIEvent evt)
@@ -41,12 +57,16 @@ namespace Fcaico.Controls.ArrowSlider
                 if (Frame.Contains (touch.LocationInView (this)))
                 {
                     PointF location = touch.LocationInView(this);
-                    PercentFilled = location.X / Frame.Width;
-                    FirePercentChanged();
+
+                    CalculateCurrentStep(location.X / Frame.Width, NumSteps);
+
+                    FirePositionChanged();
                     SetNeedsDisplay();
                 }
             }
         }
+
+
         public override void TouchesMoved (MonoTouch.Foundation.NSSet touches, UIEvent evt)
         {
             base.TouchesMoved(touches, evt);
@@ -57,27 +77,43 @@ namespace Fcaico.Controls.ArrowSlider
 
             if (location.X < Frame.Left)
             {
-                PercentFilled = 0f;
+                location.X = 0;
             }
             else if (location.X > Frame.Right)
             {
-                PercentFilled = 1f;
+                location.X = Frame.Right;
             }
-            else
-            {
-                PercentFilled = location.X / Frame.Width;
-            }
-            FirePercentChanged();
+
+            CalculateCurrentStep(location.X / Frame.Width, NumSteps);
+
+            FirePositionChanged();
             SetNeedsDisplay();
+        }
+
+        private void CalculateCurrentStep(float percentFilled, int totalSteps)
+        {
+            _percentFilled = percentFilled;
+
+            float percentPerStep = 100f / ((float) (totalSteps -1));
+            float percent = (float) Math.Round(percentFilled * 100f);
+
+            _currentStep = (int) Math.Truncate(percent / percentPerStep);
+            _discretePercentFilled = (((float) CurrentStep) * percentPerStep) / 100f;
         }
 
         public override void TouchesEnded (MonoTouch.Foundation.NSSet touches, UIEvent evt)
         {
             base.TouchesEnded(touches, evt);
+
+            CalculateCurrentStep(_percentFilled, NumSteps);
+            _percentFilled = _discretePercentFilled;
+
+            FirePositionChanged();
+            SetNeedsDisplay();
         }
 
 
-        private void FirePercentChanged()
+        private void FirePositionChanged()
         {
             // Make a temporary copy of the event to avoid possibility of 
             // a race condition if the last subscriber unsubscribes 
@@ -97,15 +133,11 @@ namespace Fcaico.Controls.ArrowSlider
 		{
 			base.Draw (rect);
 
-            float filled = PercentFilled;
+            float filled = _percentFilled;
 
-            if (NumSteps > 0)
+            if (IsDiscrete)
             {
-                float percentPerStep = 100f / ((float) (NumSteps -1));
-                float percent = (float) Math.Round(PercentFilled * 100f);
-                int curStep = (int) Math.Truncate(percent / percentPerStep);
-
-                filled = (((float) curStep) * percentPerStep) / 100f;
+                filled = _discretePercentFilled;
             }
 
             ArrowSliderStyleKit.DrawArrowSlider (Color, Color, filled, rect.Location, rect.Size);

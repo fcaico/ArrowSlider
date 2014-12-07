@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using MonoTouch.UIKit;
 using MonoTouch.Foundation;
 using System.ComponentModel;
@@ -13,11 +14,12 @@ namespace Fcaico.Controls.ArrowSlider
         private UILabel _valueLabel = new UILabel();
         private ArrowSlider  _arrow = new ArrowSlider();
         private UIColor _arrowColor = UIColor.Yellow;
-        private float _percentFilled = 0f;
         private UIFont _labelFont = UIFont.SystemFontOfSize(22);
         private List<Tuple<string, object>> _values;
         private bool _isDiscrete;
-        private int _numSteps = 100;
+        private int _numSteps = 0;
+
+        public event EventHandler CurrentValueChanged;
 
         [Export("ArrowColor"), Browsable(true)]
         public UIColor ArrowColor
@@ -48,26 +50,13 @@ namespace Fcaico.Controls.ArrowSlider
                 if (_isDiscrete != value)
                 {
                     _isDiscrete = value;
+                    _arrow.IsDiscrete = value;
                     _arrow.NumSteps = _numSteps;
                     SetNeedsDisplay();
                 }
             }
         }
 
-
-        private float PercentFilled
-        {
-            get
-            {
-                return _percentFilled;
-            }
-            set
-            {
-                _percentFilled = value;
-                SetNeedsDisplay();
-            }
-        }
-         
         public List<Tuple<string, object>> Values
         {
             get
@@ -78,10 +67,7 @@ namespace Fcaico.Controls.ArrowSlider
             {
                 _values = value;
                 _numSteps = _values.Count;
-                if (IsDiscrete)
-                {
-                    _arrow.NumSteps = _numSteps;
-                }
+                _arrow.NumSteps = _numSteps;
 
                 SetNeedsDisplay();
             }
@@ -91,46 +77,46 @@ namespace Fcaico.Controls.ArrowSlider
         {
             get
             {
-                return GetCurrentValueFromPercent();
+                return GetCurrentValueFromStep();
             }
             set
             {
-                UpdatePercentFromValue();
-                SetNeedsDisplay();
+                if (UpdateStepFromNewValue(value))
+                {
+                    SetNeedsDisplay();
+                }
             }
         }
 
-        private int GetStepFromPercent()
+        string GetCurrentTextFromStep ()
         {
-            float percentPerStep = 100f / ((float) (_numSteps -1));
-            float percent = (float) Math.Round(PercentFilled * 100f);
-
-            float a = percent / percentPerStep;
-            int index = (int) Math.Truncate(a);
-
-            int curStep = index;
-
-            Console.WriteLine("index: {0}, CurStep: {1}, PercentFilled: {2}, Percent: {3}, PercentPerStep: {4}", index, curStep, PercentFilled, percent, percentPerStep);
-            return curStep;
-
+            return _values[_arrow.CurrentStep].Item1;
         }
 
-        object GetCurrentValueFromPercent ()
+        private object GetCurrentValueFromStep()
         {
-            return _values[GetStepFromPercent()].Item2;
+            return _values[_arrow.CurrentStep].Item2;
         }
 
-        string GetCurrentTextFromPercent ()
+        private bool UpdateStepFromNewValue(object newValue)
         {
-            return _values[GetStepFromPercent()].Item1;
+            bool retVal = false;
+
+            for (int i = 0; i < _values.Count; i++)
+            {
+                if (_values.ElementAt(i).Item2 == newValue)
+                {
+                    _arrow.CurrentStep = i;
+                    retVal = true;
+                    break;
+                }
+            }
+
+            return retVal;
         }
 
-        void UpdatePercentFromValue ()
-        {
 
-        }
-
-		public ArrowSliderView(IntPtr handle) : base(handle)
+       	public ArrowSliderView(IntPtr handle) : base(handle)
 		{
 		}
 
@@ -175,11 +161,13 @@ namespace Fcaico.Controls.ArrowSlider
 
             SetDefaultValues();
 
-            _valueLabel.Text = PercentFilled.ToString();
+            _arrow.NumSteps = _numSteps;
+            _arrow.CurrentStep = 0;
+
+            _valueLabel.Text = GetCurrentTextFromStep();
             _valueLabel.TextColor = UIColor.White;
             _valueLabel.Font = _labelFont;
             _valueLabel.TextAlignment = UITextAlignment.Left;
-			_arrow.PercentFilled = 0.10f;
 
 		}
 
@@ -191,7 +179,8 @@ namespace Fcaico.Controls.ArrowSlider
                 float val = (i / 100f);
                 _values.Add(new Tuple<string,object>(val.ToString("P0"), i));
             }
-            _numSteps = 101;           
+
+            _numSteps = 101; 
         }
 
 		private void SetupConstraints()
@@ -212,20 +201,34 @@ namespace Fcaico.Controls.ArrowSlider
 
         private void OnPositionChanged(object sender, EventArgs e)
         {
-            PercentFilled = (sender as ArrowSlider).PercentFilled;
-
-
+            CurrentValue = GetCurrentValueFromStep();
+            FireCurrentValueChanged();
         }
 
 		public override void Draw (System.Drawing.RectangleF rect)
 		{
-            _valueLabel.Text = GetCurrentTextFromPercent();
+            _valueLabel.Text = GetCurrentTextFromStep();
 
             _arrow.Color = _arrowColor;
-            _arrow.PercentFilled = _percentFilled;
+           // _arrow.PercentFilled = _percentFilled;
 
 			base.Draw (rect);
 		}
+
+        private void FireCurrentValueChanged()
+        {
+            // Make a temporary copy of the event to avoid possibility of 
+            // a race condition if the last subscriber unsubscribes 
+            // immediately after the null check and before the event is raised.
+            EventHandler  handler = CurrentValueChanged;
+
+            // Event will be null if there are no subscribers 
+            if (handler != null)
+            {
+                // Use the () operator to raise the event.
+                handler(this, new EventArgs());
+            }
+        }
 	}
 
 

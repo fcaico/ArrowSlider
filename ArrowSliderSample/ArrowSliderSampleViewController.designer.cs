@@ -22,6 +22,10 @@ namespace ArrowSliderSample
 		[GeneratedCode ("iOS Designer", "1.0")]
 		Fcaico.Controls.ArrowSlider.ArrowSliderView DiscreteArrowSlider { get; set; }
 
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		Fcaico.Controls.ArrowSlider.ArrowSliderView DurationSlider { get; set; }
+
 		void ReleaseDesignerOutlets ()
 		{
 			if (ContinuousArrowSlider != null) {
@@ -31,6 +35,10 @@ namespace ArrowSliderSample
 			if (DiscreteArrowSlider != null) {
 				DiscreteArrowSlider.Dispose ();
 				DiscreteArrowSlider = null;
+			}
+			if (DurationSlider != null) {
+				DurationSlider.Dispose ();
+				DurationSlider = null;
 			}
 		}
 	}

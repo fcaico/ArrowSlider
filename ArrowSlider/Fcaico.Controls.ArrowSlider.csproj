@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Fcaico.Controls.ArrowSlider</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-    <AssemblyName>ArrowSlider</AssemblyName>
+    <AssemblyName>Fcaico.Controls.ArrowSlider</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
