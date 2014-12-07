@@ -95,7 +95,7 @@ namespace Fcaico.Controls.ArrowSlider
             _percentFilled = percentFilled;
 
             float percentPerStep = 100f / ((float) (totalSteps -1));
-            float percent = (float) Math.Round(percentFilled * 100f);
+            float percent = (float) percentFilled * 100f;
 
             _currentStep = (int) Math.Truncate(percent / percentPerStep);
             _discretePercentFilled = (((float) CurrentStep) * percentPerStep) / 100f;

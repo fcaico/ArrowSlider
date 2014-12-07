@@ -44,6 +44,14 @@ namespace ArrowSliderSample
                 new Tuple<string, object> ( "December", 12 )
             };
 
+            List<Tuple<string, object>> distances = new List<Tuple<string, object>>();
+
+            for (int i = 1; i <= 200; i++)
+            {
+                distances.Add(new Tuple<string, object>(string.Format("{0} Km", i), i));
+            }
+            DistanceSlider.Values = distances;
+
             List<Tuple<string, object>> durations = new List<Tuple<string, object>>();
             for (int i = 1; i < 12; i++)
             {

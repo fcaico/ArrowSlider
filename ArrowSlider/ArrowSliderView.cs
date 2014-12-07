@@ -104,7 +104,7 @@ namespace Fcaico.Controls.ArrowSlider
 
             for (int i = 0; i < _values.Count; i++)
             {
-                if (_values.ElementAt(i).Item2 == newValue)
+                if (_values.ElementAt(i).Item2.Equals(newValue))
                 {
                     _arrow.CurrentStep = i;
                     retVal = true;
