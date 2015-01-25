@@ -37,6 +37,7 @@ namespace Fcaico.Controls.ArrowSlider
             set
             {
                 _currentStep = value;
+                CalculatePercentForCurrentStep(_currentStep, NumSteps);
                 SetNeedsDisplay();
             }
         }
@@ -58,7 +59,7 @@ namespace Fcaico.Controls.ArrowSlider
                 {
                     PointF location = touch.LocationInView(this);
 
-                    CalculateCurrentStep(location.X / Frame.Width, NumSteps);
+                    CalculateCurrentStep((location.X) / Frame.Width, NumSteps);
 
                     FirePositionChanged();
                     SetNeedsDisplay();
@@ -84,7 +85,7 @@ namespace Fcaico.Controls.ArrowSlider
                 location.X = Frame.Right;
             }
 
-            CalculateCurrentStep(location.X / Frame.Width, NumSteps);
+            CalculateCurrentStep((location.X) / Frame.Width, NumSteps);
 
             FirePositionChanged();
             SetNeedsDisplay();
@@ -97,8 +98,18 @@ namespace Fcaico.Controls.ArrowSlider
             float percentPerStep = 100f / ((float) (totalSteps -1));
             float percent = (float) percentFilled * 100f;
 
-            _currentStep = (int) Math.Truncate(percent / percentPerStep);
+            _currentStep = (int) Math.Round (percent / percentPerStep);
             _discretePercentFilled = (((float) CurrentStep) * percentPerStep) / 100f;
+
+            Console.WriteLine(string.Format("percent Filled: {0} percentPerStep: {1} percent: {2} currentStep: {3} discPercentFilled: {4}", percentFilled, percentPerStep, percent, _currentStep, _discretePercentFilled));
+        }
+
+        void CalculatePercentForCurrentStep (int currentStep, int totalSteps)
+        {
+            float percentPerStep = 100f / ((float) (totalSteps -1));
+            float percentFilled = (float) (currentStep * percentPerStep);
+            _percentFilled = (percentFilled / 100f);
+            _discretePercentFilled = _percentFilled;
         }
 
         public override void TouchesEnded (MonoTouch.Foundation.NSSet touches, UIEvent evt)

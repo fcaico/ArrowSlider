@@ -83,6 +83,7 @@ namespace Fcaico.Controls.ArrowSlider
             {
                 if (UpdateStepFromNewValue(value))
                 {
+                    _arrow.SetNeedsDisplay();
                     SetNeedsDisplay();
                 }
             }
@@ -210,7 +211,7 @@ namespace Fcaico.Controls.ArrowSlider
             _valueLabel.Text = GetCurrentTextFromStep();
 
             _arrow.Color = _arrowColor;
-           // _arrow.PercentFilled = _percentFilled;
+            //_arrow.PercentFilled = _percentFilled;
 
 			base.Draw (rect);
 		}

@@ -53,11 +53,13 @@ namespace ArrowSliderSample
             DistanceSlider.Values = distances;
 
             List<Tuple<string, object>> durations = new List<Tuple<string, object>>();
-            for (int i = 1; i < 12; i++)
+            for (int i = 1; i <=12; i++)
             {
                 durations.Add(new Tuple<string, object>(string.Format("{0} Hours", i), i));
             }
             DurationSlider.Values = durations;
+
+            DiscreteArrowSlider.CurrentValue = 6;
 		}
 
 		public override void ViewWillAppear (bool animated)
