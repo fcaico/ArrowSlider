@@ -11,18 +11,17 @@
 
 
 using System;
-using System.Drawing;
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
-using MonoTouch.CoreGraphics;
+using CoreGraphics;
+using Foundation;
+using UIKit;
+using CoreGraphics;
 
 namespace Fcaico.Controls.ArrowSlider
 {
     [Register ("ArrowSliderStyleKit")]
     public class ArrowSliderStyleKit : NSObject
     {
-
-        //// Initialization
+        // Initialization
 
         static ArrowSliderStyleKit()
         {
@@ -30,65 +29,66 @@ namespace Fcaico.Controls.ArrowSlider
 
         //// Drawing Methods
 
-        public static void DrawArrowSlider(UIColor fillColor, UIColor outlineColor, float percentFull, PointF position, SizeF overallSize)
+        public static void DrawArrowSlider(UIColor fillColor, UIColor outlineColor, float outlinePadding, float outlineThickness, nfloat percentFull, CGPoint position, CGSize overallSize)
         {
-            //// General Declarations
+            outlinePadding = 1.0f;
+            // General Declarations
             var context = UIGraphics.GetCurrentContext();
 
+            // Variable Declarations
+            var sizeOfFill = new CGSize(percentFull * (overallSize.Width - (overallSize.Height / 2.0f)) + (overallSize.Height / 2.0f), overallSize.Height);
 
-            //// Variable Declarations
-            var sizeOfFill = new SizeF(percentFull * (overallSize.Width - 35.0f) + 35.0f, overallSize.Height);
-
-            //// Outline Drawing
-            RectangleF outlineRect = new RectangleF(position.X, position.Y, overallSize.Width, overallSize.Height);
+            // Outline Drawing
+            CGRect outlineRect = new CGRect(position.X, position.Y, overallSize.Width, overallSize.Height);
             context.SaveState();
             context.ClipToRect(outlineRect);
             context.TranslateCTM(outlineRect.X, outlineRect.Y);
 
-            ArrowSliderStyleKit.DrawArrowOutline(new RectangleF(0.0f, 0.0f, outlineRect.Width, outlineRect.Height), outlineColor);
+            ArrowSliderStyleKit.DrawArrowOutline(new CGRect(0.0f + (outlineThickness / 2.0f), 0.0f + (outlineThickness / 2.0f), outlineRect.Width - outlineThickness, outlineRect.Height - outlineThickness), outlinePadding, outlineThickness, outlineColor);
             context.RestoreState();
 
 
-            //// Fill Drawing
-            RectangleF fillRect = new RectangleF(position.X, position.Y, sizeOfFill.Width, sizeOfFill.Height);
+            // Fill Drawing
+            CGRect fillRect = new CGRect(position.X + outlineThickness, position.Y, sizeOfFill.Width, sizeOfFill.Height);
             context.SaveState();
             context.ClipToRect(fillRect);
             context.TranslateCTM(fillRect.X, fillRect.Y);
 
-            ArrowSliderStyleKit.DrawArrowFill(new RectangleF(0.0f, 0.0f, fillRect.Width, fillRect.Height), fillColor);
+            ArrowSliderStyleKit.DrawArrowFill(new CGRect(0.0f, 0.0f, fillRect.Width, fillRect.Height), outlinePadding, fillColor);
             context.RestoreState();
         }
 
-        public static void DrawArrowFill(RectangleF frameFill, UIColor fillColor)
+        public static void DrawArrowFill(CGRect frameFill, float outlinePadding, UIColor fillColor)
         {
 
-            //// FillShape Drawing
+            // FillShape Drawing
             UIBezierPath fillShapePath = new UIBezierPath();
-            fillShapePath.MoveTo(new PointF(frameFill.GetMinX() + 5.0f, frameFill.GetMaxY() - 5.0f));
-            fillShapePath.AddLineTo(new PointF(frameFill.GetMaxX() - 24.77f, frameFill.GetMaxY() - 5.0f));
-            fillShapePath.AddLineTo(new PointF(frameFill.GetMaxX() - 5.0f, frameFill.GetMinY() + 0.50000f * frameFill.Height));
-            fillShapePath.AddLineTo(new PointF(frameFill.GetMaxX() - 24.77f, frameFill.GetMinY() + 5.0f));
-            fillShapePath.AddLineTo(new PointF(frameFill.GetMinX() + 5.0f, frameFill.GetMinY() + 5.0f));
-            fillShapePath.AddLineTo(new PointF(frameFill.GetMinX() + 5.0f, frameFill.GetMaxY() - 5.0f));
+            fillShapePath.MoveTo(new CGPoint(frameFill.GetMinX() + outlinePadding, frameFill.GetMaxY() - outlinePadding));
+            fillShapePath.AddLineTo(new CGPoint(frameFill.GetMaxX() - (frameFill.Height / 2.0f), frameFill.GetMaxY() - outlinePadding));
+            fillShapePath.AddLineTo(new CGPoint(frameFill.GetMaxX() - outlinePadding, frameFill.GetMinY() + 0.50000f * frameFill.Height));
+            fillShapePath.AddLineTo(new CGPoint(frameFill.GetMaxX() - (frameFill.Height / 2.0f), frameFill.GetMinY() + outlinePadding));
+            fillShapePath.AddLineTo(new CGPoint(frameFill.GetMinX() + outlinePadding, frameFill.GetMinY() + outlinePadding));
+            fillShapePath.AddLineTo(new CGPoint(frameFill.GetMinX() + outlinePadding, frameFill.GetMaxY() - outlinePadding));
             fillShapePath.ClosePath();
             fillColor.SetFill();
             fillShapePath.Fill();
         }
 
-        public static void DrawArrowOutline(RectangleF frameOutline, UIColor outlineColor)
+        public static void DrawArrowOutline(CGRect frameOutline, float outlinePadding, float outlineThickness, UIColor outlineColor)
         {
-
-            //// OutlineShape Drawing
+            // OutlineShape Drawing
             UIBezierPath outlineShapePath = new UIBezierPath();
-            outlineShapePath.MoveTo(new PointF(frameOutline.GetMinX() + 5.0f, frameOutline.GetMaxY() - 5.0f));
-            outlineShapePath.AddLineTo(new PointF(frameOutline.GetMaxX() - 24.77f, frameOutline.GetMaxY() - 5.0f));
-            outlineShapePath.AddLineTo(new PointF(frameOutline.GetMaxX() - 5.0f, frameOutline.GetMinY() + 0.50000f * frameOutline.Height));
-            outlineShapePath.AddLineTo(new PointF(frameOutline.GetMaxX() - 24.77f, frameOutline.GetMinY() + 5.0f));
-            outlineShapePath.AddLineTo(new PointF(frameOutline.GetMinX() + 5.0f, frameOutline.GetMinY() + 5.0f));
-            outlineShapePath.AddLineTo(new PointF(frameOutline.GetMinX() + 5.0f, frameOutline.GetMaxY() - 5.0f));
+            outlineShapePath.MoveTo(new CGPoint(frameOutline.GetMinX() + outlinePadding, frameOutline.GetMaxY() - outlinePadding));
+            outlineShapePath.AddLineTo(new CGPoint(frameOutline.GetMaxX() - (frameOutline.Height / 2.0f), frameOutline.GetMaxY() - outlinePadding));
+            outlineShapePath.AddLineTo(new CGPoint(frameOutline.GetMaxX() - outlinePadding, frameOutline.GetMinY() + 0.50000f * frameOutline.Height));
+            outlineShapePath.AddLineTo(new CGPoint(frameOutline.GetMaxX() - (frameOutline.Height / 2.0f), frameOutline.GetMinY() + outlinePadding));
+            outlineShapePath.AddLineTo(new CGPoint(frameOutline.GetMinX() + outlinePadding, frameOutline.GetMinY() + outlinePadding));
+            outlineShapePath.AddLineTo(new CGPoint(frameOutline.GetMinX() + outlinePadding, frameOutline.GetMaxY() - outlinePadding));
             outlineShapePath.ClosePath();
+
             outlineColor.SetStroke();
-            outlineShapePath.LineWidth = 1.0f;
+
+            outlineShapePath.LineWidth = outlineThickness;
             outlineShapePath.Stroke();
         }
 

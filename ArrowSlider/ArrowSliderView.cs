@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
-using MonoTouch.UIKit;
-using MonoTouch.Foundation;
+using UIKit;
+using Foundation;
 using System.ComponentModel;
-using System.Drawing;
+using CoreGraphics;
 using System.Collections.Generic;
 
 namespace Fcaico.Controls.ArrowSlider
@@ -18,6 +18,9 @@ namespace Fcaico.Controls.ArrowSlider
         private List<Tuple<string, object>> _values;
         private bool _isDiscrete;
         private int _numSteps = 0;
+        private float _padding = 1.0f;
+        private float _borderWidth = 1.0f;
+        private bool _isEnabled = true;
 
         public event EventHandler CurrentValueChanged;
 
@@ -35,6 +38,67 @@ namespace Fcaico.Controls.ArrowSlider
                     _arrowColor = value;
                     SetNeedsDisplay();
                 }
+            }
+        }
+
+
+        [Export("Font"), Browsable(true)]
+        public UIFont Font
+        {
+            get
+            {
+                return _labelFont;
+            }
+            set
+            {
+                if (_labelFont != value)
+                {
+                    _labelFont = value;
+                    SetNeedsDisplay();
+                }
+            }
+        }
+
+        [Export("Padding"), Browsable(true)]
+        public float Padding
+        {
+            get
+            {
+                return _padding;
+            }
+            set
+            {
+                _padding = value;
+                SetNeedsDisplay();
+            }
+        }
+
+        [Export("BorderWidth"), Browsable(true)]
+        public float BorderWidth
+        {
+            get
+            {
+                return _borderWidth;
+            }
+            set
+            {
+                _borderWidth = value;
+                SetNeedsDisplay();
+            }
+        }
+
+
+        [Export("IsEnabled"), Browsable(true)]
+        public bool IsEnabled
+        {
+            get
+            {
+                return _isEnabled;
+            }
+            set
+            {
+                _isEnabled = value;
+                _arrow.IsEnabled = value;
             }
         }
 
@@ -56,6 +120,8 @@ namespace Fcaico.Controls.ArrowSlider
                 }
             }
         }
+
+
 
         public List<Tuple<string, object>> Values
         {
@@ -126,7 +192,7 @@ namespace Fcaico.Controls.ArrowSlider
             Initialize ();
 		}
 
-		public ArrowSliderView(RectangleF rect) : base(rect)
+		public ArrowSliderView(CGRect rect) : base(rect)
 		{
 		}
 
@@ -158,6 +224,7 @@ namespace Fcaico.Controls.ArrowSlider
             Add (_arrow);
             Add(_valueLabel);
 
+            _arrow.IsEnabled = _isEnabled;
             _arrow.PositionChanged += OnPositionChanged;
 
             SetDefaultValues();
@@ -191,7 +258,7 @@ namespace Fcaico.Controls.ArrowSlider
 
             AddConstraint (NSLayoutConstraint.Create (_valueLabel, NSLayoutAttribute.CenterY, NSLayoutRelation.Equal, this, NSLayoutAttribute.CenterY, 1, 0f));
             AddConstraint (NSLayoutConstraint.Create (_valueLabel, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, this, NSLayoutAttribute.CenterX, 1, 0f));
-            AddConstraint (NSLayoutConstraint.Create (_valueLabel, NSLayoutAttribute.Width, NSLayoutRelation.Equal, this, NSLayoutAttribute.Width, 1, -20f));
+            AddConstraint (NSLayoutConstraint.Create (_valueLabel, NSLayoutAttribute.Width, NSLayoutRelation.Equal, this, NSLayoutAttribute.Width, 1, - 20f - (2.0f * Padding)));
 
 			AddConstraint (NSLayoutConstraint.Create (_arrow, NSLayoutAttribute.Top, NSLayoutRelation.Equal, this, NSLayoutAttribute.Top, 1, 0f));
 			AddConstraint (NSLayoutConstraint.Create (_arrow, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, this, NSLayoutAttribute.Bottom, 1, 0f));
@@ -206,12 +273,13 @@ namespace Fcaico.Controls.ArrowSlider
             FireCurrentValueChanged();
         }
 
-		public override void Draw (System.Drawing.RectangleF rect)
+		public override void Draw (CGRect rect)
 		{
             _valueLabel.Text = GetCurrentTextFromStep();
 
             _arrow.Color = _arrowColor;
-            //_arrow.PercentFilled = _percentFilled;
+            _arrow.BorderWidth = BorderWidth;
+            _arrow.Padding = Padding;
 
 			base.Draw (rect);
 		}

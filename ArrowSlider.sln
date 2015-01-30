@@ -5,8 +5,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArrowSliderSample", "ArrowS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fcaico.Controls.ArrowSlider", "ArrowSlider\Fcaico.Controls.ArrowSlider.csproj", "{FC491686-DC25-4CFB-BCEE-0AB13C6FD8E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fcaico.iOS.TimePicker", "..\TimePicker\TimePicker\Fcaico.iOS.TimePicker.csproj", "{F3608B18-6A68-49E2-9731-515B87C7671A}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|iPhoneSimulator = Debug|iPhoneSimulator
@@ -29,18 +27,6 @@ Global
 		{DBE9702D-3270-4337-8E0D-1E958C18944D}.Release|iPhone.Build.0 = Release|iPhone
 		{DBE9702D-3270-4337-8E0D-1E958C18944D}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
 		{DBE9702D-3270-4337-8E0D-1E958C18944D}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
-		{F3608B18-6A68-49E2-9731-515B87C7671A}.Ad-Hoc|iPhone.ActiveCfg = Release|Any CPU
-		{F3608B18-6A68-49E2-9731-515B87C7671A}.Ad-Hoc|iPhone.Build.0 = Release|Any CPU
-		{F3608B18-6A68-49E2-9731-515B87C7671A}.AppStore|iPhone.ActiveCfg = Release|Any CPU
-		{F3608B18-6A68-49E2-9731-515B87C7671A}.AppStore|iPhone.Build.0 = Release|Any CPU
-		{F3608B18-6A68-49E2-9731-515B87C7671A}.Debug|iPhone.ActiveCfg = Debug|Any CPU
-		{F3608B18-6A68-49E2-9731-515B87C7671A}.Debug|iPhone.Build.0 = Debug|Any CPU
-		{F3608B18-6A68-49E2-9731-515B87C7671A}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
-		{F3608B18-6A68-49E2-9731-515B87C7671A}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
-		{F3608B18-6A68-49E2-9731-515B87C7671A}.Release|iPhone.ActiveCfg = Release|Any CPU
-		{F3608B18-6A68-49E2-9731-515B87C7671A}.Release|iPhone.Build.0 = Release|Any CPU
-		{F3608B18-6A68-49E2-9731-515B87C7671A}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{F3608B18-6A68-49E2-9731-515B87C7671A}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 		{FC491686-DC25-4CFB-BCEE-0AB13C6FD8E0}.Ad-Hoc|iPhone.ActiveCfg = Release|Any CPU
 		{FC491686-DC25-4CFB-BCEE-0AB13C6FD8E0}.Ad-Hoc|iPhone.Build.0 = Release|Any CPU
 		{FC491686-DC25-4CFB-BCEE-0AB13C6FD8E0}.AppStore|iPhone.ActiveCfg = Release|Any CPU
@@ -55,7 +41,6 @@ Global
 		{FC491686-DC25-4CFB-BCEE-0AB13C6FD8E0}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = ArrowSliderSample\ArrowSliderSample.csproj
 		Policies = $0
 		$0.DotNetNamingPolicy = $1
 		$1.DirectoryNamespaceAssociation = PrefixedHierarchical

@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Drawing;
+using CoreGraphics;
 
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using Foundation;
+using UIKit;
 using System.Collections.Generic;
 
 namespace ArrowSliderSample
@@ -51,6 +51,9 @@ namespace ArrowSliderSample
                 distances.Add(new Tuple<string, object>(string.Format("{0} Km", i), i));
             }
             DistanceSlider.Values = distances;
+
+            DisabledSlider.Values = distances;
+            DisabledSlider.CurrentValue = 132;
 
             List<Tuple<string, object>> durations = new List<Tuple<string, object>>();
             for (int i = 1; i <=12; i++)

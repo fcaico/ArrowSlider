@@ -1,13 +1,13 @@
 ﻿using System;
-using MonoTouch.UIKit;
-using System.Drawing;
+using UIKit;
+using CoreGraphics;
 
 namespace Fcaico.Controls.ArrowSlider
 {
 	internal class ArrowSlider : UIView
 	{
-        private float _percentFilled = 0f;
-        private float _discretePercentFilled = 0f;
+        private nfloat _percentFilled = 0f;
+        private nfloat _discretePercentFilled = 0f;
         private int _currentStep = 0;
 
 		public UIColor Color 
@@ -22,7 +22,25 @@ namespace Fcaico.Controls.ArrowSlider
             set;
         }
 
+        public bool IsEnabled
+        {
+            get;
+            set;
+        }
+
         public int NumSteps
+        {
+            get;
+            set;
+        }
+
+        public float Padding
+        {
+            get;
+            set;
+        }
+
+        public float BorderWidth
         {
             get;
             set;
@@ -49,15 +67,21 @@ namespace Fcaico.Controls.ArrowSlider
             BackgroundColor = UIColor.Clear;
 		}
 
-        public override void TouchesBegan (MonoTouch.Foundation.NSSet touches, UIEvent evt)
+        public override void TouchesBegan (Foundation.NSSet touches, UIEvent evt)
         {
             base.TouchesBegan (touches, evt);
+
+            if (!IsEnabled)
+            {
+                return;
+            }
+
             UITouch touch = touches.AnyObject as UITouch;
             if (touch != null)
             {
                 if (Frame.Contains (touch.LocationInView (this)))
                 {
-                    PointF location = touch.LocationInView(this);
+                    CGPoint location = touch.LocationInView(this);
 
                     CalculateCurrentStep((location.X) / Frame.Width, NumSteps);
 
@@ -68,13 +92,19 @@ namespace Fcaico.Controls.ArrowSlider
         }
 
 
-        public override void TouchesMoved (MonoTouch.Foundation.NSSet touches, UIEvent evt)
+        public override void TouchesMoved (Foundation.NSSet touches, UIEvent evt)
         {
             base.TouchesMoved(touches, evt);
+
+            if (!IsEnabled)
+            {
+                return;
+            }
+
             UITouch touch = touches.AnyObject as UITouch;
 
 
-            PointF location = touch.LocationInView(this);
+            CGPoint location = touch.LocationInView(this);
 
             if (location.X < Frame.Left)
             {
@@ -91,30 +121,35 @@ namespace Fcaico.Controls.ArrowSlider
             SetNeedsDisplay();
         }
 
-        private void CalculateCurrentStep(float percentFilled, int totalSteps)
+        private void CalculateCurrentStep(nfloat percentFilled, int totalSteps)
         {
             _percentFilled = percentFilled;
 
-            float percentPerStep = 100f / ((float) (totalSteps -1));
-            float percent = (float) percentFilled * 100f;
+            nfloat percentPerStep = 100f / ((nfloat) (totalSteps -1));
+            nfloat percent = (nfloat) percentFilled * 100f;
 
             _currentStep = (int) Math.Round (percent / percentPerStep);
-            _discretePercentFilled = (((float) CurrentStep) * percentPerStep) / 100f;
+            _discretePercentFilled = (((nfloat) CurrentStep) * percentPerStep) / 100f;
 
             Console.WriteLine(string.Format("percent Filled: {0} percentPerStep: {1} percent: {2} currentStep: {3} discPercentFilled: {4}", percentFilled, percentPerStep, percent, _currentStep, _discretePercentFilled));
         }
 
         void CalculatePercentForCurrentStep (int currentStep, int totalSteps)
         {
-            float percentPerStep = 100f / ((float) (totalSteps -1));
-            float percentFilled = (float) (currentStep * percentPerStep);
+            nfloat percentPerStep = 100f / ((nfloat) (totalSteps -1));
+            nfloat percentFilled = (nfloat) (currentStep * percentPerStep);
             _percentFilled = (percentFilled / 100f);
             _discretePercentFilled = _percentFilled;
         }
 
-        public override void TouchesEnded (MonoTouch.Foundation.NSSet touches, UIEvent evt)
+        public override void TouchesEnded (Foundation.NSSet touches, UIEvent evt)
         {
             base.TouchesEnded(touches, evt);
+
+            if (!IsEnabled)
+            {
+                return;
+            }
 
             CalculateCurrentStep(_percentFilled, NumSteps);
             _percentFilled = _discretePercentFilled;
@@ -140,18 +175,23 @@ namespace Fcaico.Controls.ArrowSlider
         }
 
 
-		public override void Draw (System.Drawing.RectangleF rect)
+		public override void Draw (CGRect rect)
 		{
 			base.Draw (rect);
 
-            float filled = _percentFilled;
+            nfloat filled = _percentFilled;
 
             if (IsDiscrete)
             {
                 filled = _discretePercentFilled;
             }
 
-            ArrowSliderStyleKit.DrawArrowSlider (Color, Color, filled, rect.Location, rect.Size);
+            nfloat totalPadding = 2.0f * Padding;
+            CGPoint location = new CGPoint(rect.Location.X + Padding, rect.Location.Y + Padding);
+
+            CGSize size = new CGSize(rect.Size.Width - totalPadding , rect.Size.Height - totalPadding );
+
+            ArrowSliderStyleKit.DrawArrowSlider (Color, Color, Padding, BorderWidth, filled, location, size);
 		}
 	}
 }

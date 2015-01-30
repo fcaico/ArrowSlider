@@ -1,11 +1,12 @@
-﻿<Properties>
+﻿<Properties StartupItem="ArrowSliderSample/ArrowSliderSample.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Release|iPhoneSimulator" PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.IPhone6.8.1" />
   <MonoDevelop.Ide.Workbench ActiveDocument="ArrowSlider/ArrowSlider.cs">
     <Files>
-      <File FileName="ArrowSlider/ArrowSlider.cs" Line="14" Column="14" />
-      <File FileName="ArrowSlider/ArrowSliderView.cs" Line="20" Column="20" />
-      <File FileName="ArrowSliderSample/ArrowSliderSampleViewController.cs" Line="13" Column="13" />
-      <File FileName="ArrowSlider/ArrowSliderStyleKit.cs" Line="34" Column="34" />
+      <File FileName="ArrowSlider/ArrowSlider.cs" Line="9" Column="9" />
+      <File FileName="ArrowSlider/ArrowSliderView.cs" Line="22" Column="22" />
+      <File FileName="ArrowSliderSample/ArrowSliderSampleViewController.cs" Line="1" Column="1" />
+      <File FileName="ArrowSlider/ArrowSliderStyleKit.cs" Line="6" Column="6" />
+      <File FileName="ArrowSlider/ArrowSliderDelegate.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

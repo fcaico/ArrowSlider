@@ -17,6 +17,7 @@
                         <outlet property="DiscreteArrowSlider" destination="63" id="name-outlet-63"/>
                         <outlet property="DurationSlider" destination="68" id="name-outlet-68"/>
                         <outlet property="DistanceSlider" destination="109" id="name-outlet-109"/>
+                        <outlet property="DisabledSlider" destination="165" id="name-outlet-165"/>
                     </connections>
                     <view contentMode="scaleToFill" id="18" translatesAutoresizingMaskIntoConstraints="NO" key="view">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -87,7 +88,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" id="109" customClass="ArrowSliderView" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO">
-                                <rect key="frame" x="20" y="338" width="280" height="45"/>
+                                <rect key="frame" x="20" y="338" width="280" height="95"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="PercentFilled">
                                         <real key="value" value="3"/>
@@ -96,6 +97,21 @@
                                         <color key="value" colorSpace="calibratedRGB" red="0.4823529411764706" green="0.62745098039215685" blue="1" alpha="1"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="IsDiscrete" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="Padding">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="BorderWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <view contentMode="scaleToFill" id="165" customClass="ArrowSliderView" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="20" y="464" width="280" height="76"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="ArrowColor">
+                                        <color key="value" colorSpace="calibratedRGB" red="0.6" green="0.4" blue="0.2" alpha="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="IsEnabled" value="NO"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
