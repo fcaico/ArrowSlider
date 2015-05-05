@@ -130,8 +130,6 @@ namespace Fcaico.Controls.ArrowSlider
 
             _currentStep = (int) Math.Round (percent / percentPerStep);
             _discretePercentFilled = (((nfloat) CurrentStep) * percentPerStep) / 100f;
-
-            Console.WriteLine(string.Format("percent Filled: {0} percentPerStep: {1} percent: {2} currentStep: {3} discPercentFilled: {4}", percentFilled, percentPerStep, percent, _currentStep, _discretePercentFilled));
         }
 
         void CalculatePercentForCurrentStep (int currentStep, int totalSteps)

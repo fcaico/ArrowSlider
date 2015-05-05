@@ -21,6 +21,8 @@ namespace Fcaico.Controls.ArrowSlider
         private float _padding = 1.0f;
         private float _borderWidth = 1.0f;
         private bool _isEnabled = true;
+        private float _fontBaselineOffset = 0;
+        private NSLayoutConstraint _fontBaselineConstraint;
 
         public event EventHandler CurrentValueChanged;
 
@@ -54,10 +56,33 @@ namespace Fcaico.Controls.ArrowSlider
                 if (_labelFont != value)
                 {
                     _labelFont = value;
+                    _valueLabel.Font = value;
                     SetNeedsDisplay();
                 }
             }
         }
+
+
+        [Export("FontBaselineOffset"), Browsable(true)]
+        public float FontBaselineOffset
+        {
+            get
+            {
+                return _fontBaselineOffset;
+            }
+            set
+            {
+                RemoveConstraint(_fontBaselineConstraint); 
+
+                _fontBaselineOffset = value;
+                _fontBaselineConstraint = CreateFontBaselineConstraint(_fontBaselineOffset);
+
+                AddConstraint(_fontBaselineConstraint);
+                SetNeedsUpdateConstraints();
+                LayoutIfNeeded();
+            }
+        }
+           
 
         [Export("Padding"), Browsable(true)]
         public float Padding
@@ -251,12 +276,20 @@ namespace Fcaico.Controls.ArrowSlider
             _numSteps = 101; 
         }
 
+        private NSLayoutConstraint CreateFontBaselineConstraint(float offset)
+        {
+            return NSLayoutConstraint.Create(_valueLabel, NSLayoutAttribute.CenterY, NSLayoutRelation.Equal, this, NSLayoutAttribute.CenterY, 1, offset);
+        }
+
+
 		private void SetupConstraints()
 		{
             _valueLabel.TranslatesAutoresizingMaskIntoConstraints = false;
 			_arrow.TranslatesAutoresizingMaskIntoConstraints = false;
 
-            AddConstraint (NSLayoutConstraint.Create (_valueLabel, NSLayoutAttribute.CenterY, NSLayoutRelation.Equal, this, NSLayoutAttribute.CenterY, 1, 0f));
+            _fontBaselineConstraint = CreateFontBaselineConstraint(_fontBaselineOffset);
+            AddConstraint (_fontBaselineConstraint);
+
             AddConstraint (NSLayoutConstraint.Create (_valueLabel, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, this, NSLayoutAttribute.CenterX, 1, 0f));
             AddConstraint (NSLayoutConstraint.Create (_valueLabel, NSLayoutAttribute.Width, NSLayoutRelation.Equal, this, NSLayoutAttribute.Width, 1, - 20f - (2.0f * Padding)));
 
